@@ -78,7 +78,7 @@ prepare_server() {
 
     echo
     echo -e "${GREEN}🛠️  Server preparation starting...${RESET}"
-    sudo brew -q update
+     brew -q update
     cd $HOME
 
     install_dependencies
@@ -123,8 +123,8 @@ install_nodeJS() {
 install_go() {
   echo 
   echo -e "${YELLOW}\nInstalling Go...${RESET}"
-  sudo rm -rf /usr/local/go
-  curl -L https://go.dev/dl/go1.22.4.darwin-amd64.tar.gz | sudo tar -xzf - -C /usr/local
+   rm -rf /usr/local/go
+  curl -L https://go.dev/dl/go1.22.4.darwin-amd64.tar.gz |  tar -xzf - -C /usr/local
   echo 'export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin' >> $HOME/.bash_profile
   echo 'export PATH=$PATH:$(go env GOPATH)/bin' >> $HOME/.bash_profile
   source .bash_profile
@@ -135,10 +135,10 @@ install_go() {
 install_python() {
   echo 
   echo -e "${YELLOW}\nInstalling Python...${RESET}"
-  sudo brew install python3 
+   brew install python3 
   python3 --version
 
-  sudo brew install python3-pip 
+   brew install python3-pip 
   pip3 --version
   echo -e "${GREEN}✅ Python installed successfully.${RESET}"
 
@@ -151,9 +151,9 @@ install_docker() {
     echo -e "${YELLOW}\nChecking Docker installation...${RESET}"
     if ! command -v docker &> /dev/null; then
         echo -e "${COLOR_YELLOW}Docker not found. Installing Docker...${RESET}"
-        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-        echo "deb [arch=$(brew --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /usr/local/etc/homebrew/sources.list.d/docker.list > /dev/null
-        sudo brew-get update >/dev/null 2>&1
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg |  gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+        echo "deb [arch=$(brew --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" |  tee /usr/local/etc/homebrew/sources.list.d/docker.list > /dev/null
+         brew-get update >/dev/null 2>&1
         brew install docker-ce docker-ce-cli containerd.io >/dev/null 2>&1
         echo -e "${GREEN}Docker installed successfully.${RESET}"
         log_message "Docker installed."
@@ -170,7 +170,7 @@ install_docker_compose() {
     if ! command -v docker-compose &> /dev/null; then
         echo -e "${COLOR_YELLOW}Docker Compose not found. Installing Docker Compose...${RESET}"
         curl -L "https://github.com/docker/compose/releases/download/$(curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r .tag_name)/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-        sudo chmod +x /usr/local/bin/docker-compose
+         chmod +x /usr/local/bin/docker-compose
          echo -e "${GREEN}✅ Docker Compose installed successfully.${RESET}"
     else
         echo -e "${GREEN}Docker Compose is already installed.${RESET}"
@@ -187,7 +187,7 @@ update_server() {
 reboot_server() {
   echo 
   echo -e "${YELLOW}\nRebooting server...${RESET}"
-  sudo reboot
+   reboot
   echo -e "${GREEN}✅ Server rebooted successfully.${RESET}"
 }
 
