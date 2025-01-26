@@ -78,7 +78,7 @@ prepare_server() {
 
     echo
     echo -e "${GREEN}🛠️  Server preparation starting...${RESET}"
-    sudo apt -q update
+    sudo brew -q update
     cd $HOME
 
     install_dependencies
@@ -97,7 +97,7 @@ prepare_server() {
 install_dependencies() {
     echo
     echo -e "${YELLOW}\nInstalling system dependencies...${RESET}"
-    sudo apt update  >/dev/null 2>&1 && sudo apt upgrade  >/dev/null 2>&1
+    brew update  >/dev/null 2>&1 && brew upgrade  >/dev/null 2>&1
     brew install screen curl unzip htop tar wget aria2 clang pkg-config libssl-dev jq build-essential git make ncdu npm >/dev/null 2>&1
     echo -e "${GREEN}✅ System dependencies installed successfully.${RESET}"
 }
@@ -135,10 +135,10 @@ install_go() {
 install_python() {
   echo 
   echo -e "${YELLOW}\nInstalling Python...${RESET}"
-  sudo apt install python3 
+  sudo brew install python3 
   python3 --version
 
-  sudo apt install python3-pip 
+  sudo brew install python3-pip 
   pip3 --version
   echo -e "${GREEN}✅ Python installed successfully.${RESET}"
 
@@ -152,8 +152,8 @@ install_docker() {
     if ! command -v docker &> /dev/null; then
         echo -e "${COLOR_YELLOW}Docker not found. Installing Docker...${RESET}"
         curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-        echo "deb [arch=$(brew --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /usr/local/etc/apt/sources.list.d/docker.list > /dev/null
-        sudo apt-get update >/dev/null 2>&1
+        echo "deb [arch=$(brew --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /usr/local/etc/homebrew/sources.list.d/docker.list > /dev/null
+        sudo brew-get update >/dev/null 2>&1
         brew install docker-ce docker-ce-cli containerd.io >/dev/null 2>&1
         echo -e "${GREEN}Docker installed successfully.${RESET}"
         log_message "Docker installed."
@@ -180,7 +180,7 @@ install_docker_compose() {
 update_server() {
   echo 
   echo -e "${YELLOW}\nUpdating server...${RESET}"
-  sudo apt update  >/dev/null 2>&1 && sudo apt upgrade  >/dev/null 2>&1
+  brew update  >/dev/null 2>&1 && brew upgrade  >/dev/null 2>&1
   echo -e "${GREEN}✅ Server updated successfully.${RESET}"
 }
 
