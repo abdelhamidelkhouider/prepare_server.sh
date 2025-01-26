@@ -78,7 +78,7 @@ prepare_server() {
 
     echo
     echo -e "${GREEN}🛠️  Server preparation starting...${RESET}"
-     brew -q update
+     brew update
     cd $HOME
 
     install_dependencies
